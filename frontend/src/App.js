@@ -78,7 +78,7 @@ function App() {
     if (initialLoad) {
       const filteringTimer = setTimeout(() => {
         startRaffle();
-      }, 100);
+      }, (names.length <= 10 ? 1000 : 100));
       return () => {
         clearTimeout(filteringTimer);
       };
@@ -122,7 +122,7 @@ function App() {
         {transitions.map(({ item, props: { y, ...rest }, index }) => (
           <animated.div
             className="raffle-listnames"
-            key={index}
+            key={item.name} // Use a unique identifier, like the 'name' property
             style={{
               transform: y.interpolate(y => `translate3d(0,${y}px,0)`),
               ...rest
